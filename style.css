@@ -1,0 +1,289 @@
+/* Reset some default styles */
+body, h2, input, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and overall layout */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Header styling */
+.header {
+  background-color: #004d40;
+  color: #fdfffc;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.header h2 {
+  font-weight: 600;
+}
+
+/* Input box styling */
+.inputbox {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.numberbox {
+  padding: 10px;
+  border: 2px solid #004d40;
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 14px;
+}
+
+/* Slider container styling */
+.slider-container {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Slider styling */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  background: #ddd;
+  border-radius: 10px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #004d40;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #003b32;
+}
+
+.slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #004d40;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #003b32;
+}
+
+/* Progress bar styling */
+#progress-bar {
+  position: absolute;
+  height: 12px;
+  background-color: #81c784;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+/* Button styling */
+.play-button {
+  background-color: #004d40;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.play-button:hover {
+  background-color: #003b32;
+}
+
+/* Description styling */
+.description {
+  margin-top: 20px;
+  text-align: center;
+  max-width: 600px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Updated styles for board and name visibility */
+.queen-arrangement > div, #n-queen-board > div {
+  background-color: #e0f7fa;
+  border: 2px solid #004d40;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: auto;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.queen-arrangement > div:hover, #n-queen-board > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Board name styling */
+.queen-arrangement > div::before, #n-queen-board > div::before {
+  content: attr(data-board-name);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #004d40;
+  color: #e0f2f1;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Centering the entire content */
+.n-queen {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Board container styling */
+.queen-arrangement, #n-queen-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .queen-arrangement, #n-queen-board {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .queen-arrangement, #n-queen-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Chessboard styles */
+table {
+  border-collapse: collapse;
+  margin: 10px auto;
+}
+
+td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #373f51;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #004d40;
+  color: #fdfffc;
+  padding: 20px;
+  text-align: left;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer h3 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-content div {
+  flex: 1;
+  margin: 10px;
+}
+
+.footer-content pre {
+  background-color: #002c2a;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  color: #e0f7fa;
+}
+
+.footer-content h4 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  .footer-content div {
+    margin: 10px 0;
+  }
+}

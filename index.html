@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N-Queen Visualiser</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h2>
+        N-Queens Visualiser <i class="fas fa-crown" style="color: #fdfffc"></i>
+      </h2>
+    </header>
+    <div class="n-queen">
+      <div class="inputbox">
+        <input type="number" class="numberbox" id="numberbox" required />
+        <label>Enter total Queens</label>
+      </div>
+
+      <div class="slider-container">
+        <input
+          class="slider"
+          id="slider"
+          type="range"
+          min="0"
+          max="100"
+          value="60"
+        />
+        <div id="progress-bar"></div>
+      </div>
+      <button class="play-button" id="play-button">
+        <i class="fa fa-play" aria-hidden="true"></i> Play
+      </button>
+    </div>
+
+    <div class="queen-arrangement" id="queen-arrangement"></div>
+    <div id="n-queen-board"></div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <h3>Code Information</h3>
+      <p>
+        The N-Queens problem involves placing N queens on an N×N chessboard such that no two queens can attack each other. This means no two queens share the same row, column, or diagonal.
+      </p>
+      <p>
+        <strong>Key Concepts:</strong>
+        <ul>
+          <li><strong>Constraints:</strong> No shared rows, columns, or diagonals. Diagonal constraints can be expressed as <code>i - j = constant</code> and <code>i + j = constant</code>.</li>
+          <li><strong>Solution Approaches:</strong> Backtracking, CSP techniques, heuristics, and symmetry breaking.</li>
+        </ul>
+      </p>
+      <p>
+        <strong>Complexity:</strong>
+        <ul>
+          <li>Time Complexity: <code>O(N!)</code> for backtracking.</li>
+          <li>Space Complexity: <code>O(N)</code> for storing positions; <code>O(N * k)</code> if storing all solutions.</li>
+        </ul>
+      </p>
+      <p>
+        <strong>Applications:</strong> Testing constraint satisfaction algorithms, parallel processing, and quantum computing studies.
+      </p>
+      
+      <div class="footer-content">
+        <div>
+          <h4>C++</h4>
+          <pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+void printSolution(const vector&lt;vector&lt;int&gt;&gt; &amp;board) {
+    for (const auto &row : board) {
+        for (int cell : row) {
+            cout &lt;&lt; (cell ? "Q " : ". ");
+        }
+        cout &lt;&lt; endl;
+    }
+    cout &lt;&lt; endl;
+}
+
+bool isSafe(const vector&lt;vector&lt;int&gt;&gt; &amp;board, int row, int col) {
+    int i, j;
+    for (i = 0; i &lt; col; i++) {
+        if (board[row][i]) return false;
+    }
+    for (i = row, j = col; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+        if (board[i][j]) return false;
+    }
+    for (i = row, j = col; j &gt;= 0 &amp;&amp; i &lt; board.size(); i++, j--) {
+        if (board[i][j]) return false;
+    }
+    return true;
+}
+
+bool solveNQueensUtil(vector&lt;vector&lt;int&gt;&gt; &amp;board, int col) {
+    if (col >= board.size()) return true;
+    for (int i = 0; i &lt; board.size(); i++) {
+        if (isSafe(board, i, col)) {
+            board[i][col] = 1;
+            if (solveNQueensUtil(board, col + 1)) return true;
+            board[i][col] = 0;
+        }
+    }
+    return false;
+}
+
+void solveNQueens(int n) {
+    vector&lt;vector&lt;int&gt;&gt; board(n, vector&lt;int&gt;(n, 0));
+    if (solveNQueensUtil(board, 0)) {
+        printSolution(board);
+    } else {
+        cout &lt;&lt; "Solution does not exist" &lt;&lt; endl;
+    }
+}
+
+int main() {
+    int n;
+    cout &lt;&lt; "Enter the number of queens: ";
+    cin &gt;&gt; n;
+    solveNQueens(n);
+    return 0;
+}
+          </code></pre>
+        </div>
+        <div>
+          <h4>Java</h4>
+          <pre><code>import java.util.Arrays;
+
+public class NQueens {
+
+    public static void printSolution(int[][] board) {
+        for (int[] row : board) {
+            for (int cell : row) {
+                System.out.print((cell == 1 ? "Q " : ". "));
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static boolean isSafe(int[][] board, int row, int col) {
+        for (int i = 0; i &lt; col; i++) {
+            if (board[row][i] == 1) return false;
+        }
+        for (int i = row, j = col; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+            if (board[i][j] == 1) return false;
+        }
+        for (int i = row, j = col; j &gt;= 0 &amp;&amp; i &lt; board.length; i++, j--) {
+            if (board[i][j] == 1) return false;
+        }
+        return true;
+    }
+
+    public static boolean solveNQueensUtil(int[][] board, int col) {
+        if (col >= board.length) return true;
+        for (int i = 0; i &lt; board.length; i++) {
+            if (isSafe(board, i, col)) {
+                board[i][col] = 1;
+                if (solveNQueensUtil(board, col + 1)) return true;
+                board[i][col] = 0;
+            }
+        }
+        return false;
+    }
+
+    public static void solveNQueens(int n) {
+        int[][] board = new int[n][n];
+        if (solveNQueensUtil(board, 0)) {
+            printSolution(board);
+        } else {
+            System.out.println("Solution does not exist");
+        }
+    }
+
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        System.out.print("Enter the number of queens: ");
+        int n = sc.nextInt();
+        sc.close();
+        solveNQueens(n);
+    }
+}
+          </code></pre>
+        </div>
+        <div>
+          <h4>Python</h4>
+          <pre><code>def print_solution(board):
+    for row in board:
+        print(" ".join("Q" if cell else "." for cell in row))
+    print()
+
+def is_safe(board, row, col):
+    for i in range(col):
+        if board[row][i]:
+            return False
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j]:
+            return False
+    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
+        if board[i][j]:
+            return False
+    return True
+
+def solve_n_queens_util(board, col):
+    if col >= len(board):
+        return True
+    for i in range(len(board)):
+        if is_safe(board, i, col):
+            board[i][col] = 1
+            if solve_n_queens_util(board, col + 1):
+                return True
+            board[i][col] = 0
+    return False
+
+def solve_n_queens(n):
+    board = [[0] * n for _ in range(n)]
+    if solve_n_queens_util(board, 0):
+        print_solution(board)
+    else:
+        print("Solution does not exist")
+
+if __name__ == "__main__":
+    n = int(input("Enter the number of queens: "))
+    solve_n_queens(n)
+          </code></pre>
+        </div>
+        <div>
+          <h4>JavaScript</h4>
+          <pre><code>'use strict';
+
+function printSolution(board) {
+    board.forEach(row => {
+        console.log(row.map(cell => (cell ? 'Q' : '.')).join(' '));
+    });
+    console.log();
+}
+
+function isSafe(board, row, col) {
+    for (let i = 0; i &lt; col; i++) {
+        if (board[row][i]) return false;
+    }
+    for (let i = row, j = col; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+        if (board[i][j]) return false;
+    }
+    for (let i = row, j = col; j &gt;= 0 &amp;&amp; i &lt; board.length; i++, j--) {
+        if (board[i][j]) return false;
+    }
+    return true;
+}
+
+function solveNQueensUtil(board, col) {
+    if (col >= board.length) return true;
+    for (let i = 0; i &lt; board.length; i++) {
+        if (isSafe(board, i, col)) {
+            board[i][col] = 1;
+            if (solveNQueensUtil(board, col + 1)) return true;
+            board[i][col] = 0;
+        }
+    }
+    return false;
+}
+
+function solveNQueens(n) {
+    const board = Array.from({ length: n }, () => Array(n).fill(0));
+    if (solveNQueensUtil(board, 0)) {
+        printSolution(board);
+    } else {
+        console.log('Solution does not exist');
+    }
+}
+
+const numberbox = document.getElementById('numberbox');
+const playButton = document.getElementById('play-button');
+
+playButton.addEventListener('click', () => {
+    const n = parseInt(numberbox.value, 10);
+    solveNQueens(n);
+});
+          </code></pre>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
