@@ -15,7 +15,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/n-queens-visualizer.git
+    git clone https://github.com/SaiSriramKamineni/N-Queen-Visualizer.git
     ```
 
 2. Navigate to the project directory:
@@ -43,23 +43,6 @@ Contributions are welcome! If you have suggestions for improving the visualizer,
 Happy coding! 🎉
 
 ## 📄 Code Examples
-
-### SQL
-```sql
--- Example SQL query for managing a database of solutions
-CREATE TABLE solutions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    board TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Insert a new solution
-INSERT INTO solutions (board) VALUES ('...');
-
--- Retrieve all solutions
-SELECT * FROM solutions;
-
-
 ## 📄 Code Examples
 
 ### C++
