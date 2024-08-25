@@ -43,8 +43,6 @@ Contributions are welcome! If you have suggestions for improving the visualizer,
 Happy coding! 🎉
 
 ## 📄 Code Examples
-## 📄 Code Examples
-
 ### C++
 ```cpp
 #include <iostream>
